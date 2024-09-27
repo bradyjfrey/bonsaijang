@@ -10,7 +10,7 @@ p, h1, h2, h3, h4, h5, h6 {overflow-wrap: break-word;}
 /* Sebastiano Guerriero Typography System */
 :root {
     --font-primary: "artifex-hand-cf", helvetica, arial, sans-serif;
-    --font-secondary: 'Gotham SSm A', 'Gotham SSm B', helvetica, arial, sans-serif;
+    --font-secondary: "artifex-hand-cf", helvetica, arial, sans-serif;
 
     /* set base values */
     --text-base-size: 1em;
@@ -55,12 +55,6 @@ h2, .text--xl {
 h3, .text--lg {
     font-size: var(--text-lg);
     font-family: var(--font-secondary);
-}
-p span, p a, main li a {
-    font-family: var(--font-secondary);
-    font-size: .7em;
-    text-transform: uppercase;
-    font-weight: 700;
 }
 h4, .text--md {
     font-size: var(--text-md);
@@ -153,7 +147,7 @@ font-style: italic;
 */
 
 body {background: #1f4946;}
-main {background: #1f4946 repeat url(images/background.png) center center;}
+.main {background: #1f4946 repeat url(images/background.png) center center;}
 header {
 	padding: 2em 0;color: white;}
 h1 {
@@ -162,6 +156,7 @@ h1 {
 	font-weight: 800;
 	color: #ffc7b4;
 	text-transform: uppercase;
+	text-shadow: 0px 1px 0px rgba(0,0,0,.25);
 }
 h1 em {
     font-family: var(--font-primary);
@@ -169,14 +164,9 @@ h1 em {
 	font-style: normal;
 	color: #1d1d1d;
 }
-@media screen and (max-width: 600px)  {
-	.mobile-break {display: block;}
-}
-@media screen and (min-width: 600px)  {
-	main img {width: 75%;}
-	h1 {font-size: 2.5em;}
-}
-article {
+
+.hero {display: block;margin: 0 auto;}
+.main main {
     margin: 0 auto;
     padding: 0 1.5em 3em 1.5em;
     text-align: left;
@@ -187,6 +177,145 @@ article {
     justify-items: baseline;
     align-items: start;
 }
-img {display: block;margin: 0 auto;}
-footer {color: #275e5a;}
-footer p {padding: 1em 0;font-weight: 500;font-size: .75em;}
+
+/* bio */
+.bio {
+	background-color: #1e3d3b;
+}
+.bio article {
+	max-width: 50em;
+	padding: 2em 1em;
+	margin: 0 auto;
+	text-align: left;
+}
+.bio p {
+	color: #ffc7b4;
+}
+
+/* little tree */
+.bonsai {
+	max-width: 50em;
+	display: grid;
+    padding: 1em 0;
+    column-gap: 1em;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat (2, 1fr)
+    align-items: top;
+}
+
+.bicon {
+	box-shadow: 0px 0px 5px rgba(0,0,0,.5);
+	border: 1px solid black;
+	grid-column-start: 1;
+	grid-column-end: 4;
+	grid-row-start: 1;
+	grid-row-end: 3;
+}
+.binfo {
+	grid-column-start: 4;
+    grid-column-end: 10;
+    grid-row-start: 1;
+	grid-row-end: 3;
+}
+.iconlink h4 {
+	font-size: var(--text-md);
+}
+.iconlink h4 em {
+	font-style: normal;
+	font-weight: normal;
+	display: block;
+	font-size: var(--text-sm);
+}
+.iconlink p {
+	font-size: var(--text-sm);
+	padding-top: 0.75em;
+}
+.iconlink ul {
+	grid-column-start: 10;
+    grid-column-end: 13;
+    grid-row-start: 1;
+	grid-row-end: 3;
+	list-style: none;
+	padding: 0 0 0 2em;
+	border-left: 1px solid rgba(255,199,180,0.1);
+	font-size: var(--text-sm);
+}
+.iconlink ul li {
+	padding: 0 0 .75em 0;
+}
+.iconlink {
+	display: block;
+	padding: 1em;
+	color: #ffc7b4;
+	text-decoration: none;
+	border-bottom: 1px solid #1e3d3b;
+}
+.iconlink:hover {
+	background-color: #1a3533;
+	color: white;
+}
+.iconlink:hover .bicon {
+	border: 1px solid white;
+}
+.content a {
+    margin: 0 auto;
+    text-align: left;
+    display: grid;
+    grid-template-rows: auto;
+    row-gap: .5em;
+    justify-content: center;
+    justify-items: baseline;
+    align-items: start;
+}
+
+
+/* Footer */
+footer {
+	color: #275e5a;
+	background-color: #1e3d3b;
+}
+footer p {
+	padding: 1em 0;
+	font-weight: 500;
+	font-size: var(--text-sm);
+}
+
+
+
+/*** Small Screen Goodness ***/
+@media screen and (max-width: 600px)  {
+	.mobilebreak {display: block;}
+	.mobilespace {display: block;padding-top: 1em;}
+	.bicon {
+		grid-column-start: 1;
+		grid-column-end: 5;
+		grid-row-start: 1;
+		grid-row-end: 3;
+	}
+	.binfo {
+		grid-column-start: 5;
+		grid-column-end: 13;
+		grid-row-start: 1;
+		grid-row-end: 2;
+	}
+	.binfo p {
+		padding-bottom: 1em;
+	}
+	.iconlink {
+		padding: 0 1em;
+	}
+	.iconlink ul {
+		grid-column-start: 5;
+		grid-column-end: 13;
+		grid-row-start: 2;
+		grid-row-end: 3;
+		padding: 1em 0 0 0;
+		border-top: 1px solid rgba(255,199,180,0.1);
+		border-left: none;
+	}
+
+}
+@media screen and (min-width: 600px)  {
+	.hero {width: 75%;}
+	h1 {font-size: 2.5em;}
+}
