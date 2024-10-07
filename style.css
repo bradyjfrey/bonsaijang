@@ -347,3 +347,51 @@ footer p {
 @media screen and (min-width: 600px)  {
 	h1 {font-size: 2.5em;}
 }
+
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; 
+    z-index: 1; 
+    padding-top: 100px; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.75); 
+}
+
+/* Modal Content (Image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    border: 3px solid white;
+}
+.modal-content {
+    animation: zoom 0.2s;
+}
+@keyframes zoom {
+    from {transform: scale(0.1)}
+    to {transform: scale(1)}
+}
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 50px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.close:hover,
+.close:focus {
+	color: #1e3d3b;
+    text-decoration: none;
+    cursor: pointer;
+}
