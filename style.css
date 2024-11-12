@@ -146,7 +146,7 @@ font-weight: 800;
 font-style: italic;
 */
 
-body {background: #1f4946;}
+body {background: #1e3d3b;}
 .main {background: #1f4946 repeat url(images/background.png) center center;}
 header {
 	padding: 2em 1.5em 3em 1.5em;
@@ -267,6 +267,9 @@ h1 em {
 .iconlink:hover .bicon {
 	border: 1px solid white;
 }
+.content {
+	background-color: #1f4946;
+}
 .content a {
     margin: 0 auto;
     text-align: left;
@@ -276,6 +279,27 @@ h1 em {
     justify-content: center;
     justify-items: baseline;
     align-items: start;
+}
+.gob {
+	font-size: 80%;
+	color: #ffc7b4;
+	text-transform: uppercase;
+	padding: 0.2em 0.4em;
+	text-decoration: none;
+	font-weight: bold !important;
+	opacity: 0.5;
+	
+}
+.gob::after {
+    content: " \0279C";
+    display:inline-block;
+}
+.gob:hover {
+	background-color: #1d1d1d;
+	color: #ffc7b4;
+	text-decoration: none;
+	border-radius: 0.25em;
+	opacity: 1;
 }
 
 
@@ -326,6 +350,7 @@ textarea {
 button {
 	background-color: #ffc7b4;
 	border: 1px solid #1e3d3b;
+	color: #1d1d1d;
 	padding: .25em 4em;
 	cursor: pointer;
 	box-shadow: 0 .25em .25em rgba(0,0,0,.25);
