@@ -1,47 +1,61 @@
-// Select all anchor tags with the 'image-link' class
-var imageLinks = document.querySelectorAll(".iconlink");
+// Create modal once and reuse it
+var modal = document.createElement("div");
+modal.setAttribute("class", "modal");
+modal.setAttribute("role", "dialog");
+modal.setAttribute("aria-modal", "true");
+modal.setAttribute("aria-label", "Enlarged bonsai image");
 
-imageLinks.forEach(function(link) {
-    link.addEventListener("click", function(event) {
-        // Prevent the default anchor click behavior (stopping navigation)
+var closeBtn = document.createElement("span");
+closeBtn.setAttribute("class", "close");
+closeBtn.setAttribute("aria-label", "Close image");
+closeBtn.setAttribute("role", "button");
+closeBtn.setAttribute("tabindex", "0");
+closeBtn.innerHTML = "&times;";
+
+var modalContent = document.createElement("img");
+modalContent.setAttribute("class", "modal-content");
+modalContent.setAttribute("alt", "");
+
+modal.appendChild(closeBtn);
+modal.appendChild(modalContent);
+document.body.appendChild(modal);
+
+function openModal(href, altText) {
+    modalContent.src = href;
+    modalContent.setAttribute("alt", altText);
+    modal.style.display = "block";
+    closeBtn.focus();
+}
+
+function closeModal() {
+    modal.style.display = "none";
+    modalContent.src = "";
+}
+
+// Use event delegation instead of per-element listeners
+document.addEventListener("click", function(event) {
+    var link = event.target.closest(".iconlink");
+    if (link) {
         event.preventDefault();
+        var img = link.querySelector("img");
+        var altText = img ? img.getAttribute("alt") : "";
+        openModal(link.href, altText);
+    }
+});
 
-        // Create the modal elements dynamically
-        var modal = document.createElement("div");
-        modal.setAttribute("class", "modal");
+// Close on close button click
+closeBtn.addEventListener("click", closeModal);
 
-        var modalContent = document.createElement("img");
-        modalContent.setAttribute("class", "modal-content");
+// Close on backdrop click
+modal.addEventListener("click", function(event) {
+    if (event.target === modal) {
+        closeModal();
+    }
+});
 
-        var caption = document.createElement("div");
-        caption.setAttribute("id", "caption");
-
-        var closeBtn = document.createElement("span");
-        closeBtn.setAttribute("class", "close");
-        closeBtn.innerHTML = "&times;";
-
-        // Append the modal elements
-        modal.appendChild(closeBtn);
-        modal.appendChild(modalContent);
-        modal.appendChild(caption);
-        document.body.appendChild(modal);
-
-        // Set the modal content
-        modal.style.display = "block";
-        modalContent.src = this.href; // Use the href attribute of the anchor (full-size image URL)
-
-        // Close modal when clicking close button
-        closeBtn.onclick = function() {
-            modal.style.display = "none";
-            document.body.removeChild(modal); // Remove modal from the DOM
-        };
-
-        // Close modal when clicking outside the image
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-                document.body.removeChild(modal); // Remove modal from the DOM
-            }
-        };
-    });
+// Close on Escape key
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape" && modal.style.display === "block") {
+        closeModal();
+    }
 });

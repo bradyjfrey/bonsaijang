@@ -114,38 +114,6 @@ b, strong {
     white-space: nowrap;
 }
 
-/* 
-Artifex Hand CF Extra Light
-font-family: "artifex-hand-cf", sans-serif;
-font-weight: 200;
-font-style: normal;
-
-Artifex Hand CF Extra Light Italic
-font-family: "artifex-hand-cf", sans-serif;
-font-weight: 200;
-font-style: italic;
-
-Artifex Hand CF Book
-font-family: "artifex-hand-cf", sans-serif;
-font-weight: 500;
-font-style: normal;
-
-Artifex Hand CF Book Italic
-font-family: "artifex-hand-cf", sans-serif;
-font-weight: 500;
-font-style: italic;
-
-Artifex Hand CF Extra Bold
-font-family: "artifex-hand-cf", sans-serif;
-font-weight: 800;
-font-style: normal;
-
-Artifex Hand CF Extra Bold Italic
-font-family: "artifex-hand-cf", sans-serif;
-font-weight: 800;
-font-style: italic;
-*/
-
 body {background: #1e3d3b;}
 .main {background: #1f4946 repeat url(images/background.png) center center;}
 header {
@@ -209,7 +177,7 @@ h1 em {
     padding: 1em 0;
     column-gap: 1em;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: repeat (2, 1fr)
+    grid-template-rows: repeat(2, 1fr);
     align-items: top;
 }
 
@@ -286,7 +254,7 @@ h1 em {
 	text-transform: uppercase;
 	padding: 0.2em 0.4em;
 	text-decoration: none;
-	font-weight: bold !important;
+	font-weight: bold;
 	opacity: 0.5;
 	
 }
