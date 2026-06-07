@@ -150,6 +150,10 @@ h1 em {
     align-items: top;
 }
 
+/* let the <picture> wrapper pass through so the img stays the grid item */
+.bonsai picture {
+	display: contents;
+}
 .bicon {
 	box-shadow: 0px 0px 5px rgba(0,0,0,.5);
 	border: 1px solid black;
@@ -405,4 +409,13 @@ footer p {
 	color: #1e3d3b;
     text-decoration: none;
     cursor: pointer;
+}
+/* Only show a focus ring for keyboard users, styled in the site palette */
+.close:focus:not(:focus-visible) {
+	outline: none;
+}
+.close:focus-visible {
+	outline: 3px solid #ffc7b4;
+	outline-offset: 4px;
+	border-radius: 4px;
 }
