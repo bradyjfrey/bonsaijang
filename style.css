@@ -29,20 +29,11 @@ p, h1, h2, h3, h4, h5, h6 {overflow-wrap: break-word;}
     --heading-line-height: 1.5;
     --body-line-height: 1.5;
 }
-@include breakpoint(md) {
-    :root {
-        --text-base-size: 1em;
-        --text-scale-ratio: 1.25;
-    }
-}
 body {
     font-size: var(--text-base-size);
     font-family: var(--font-primary);
-    color: var(--color-text);
 }
 h1, h2, h3, h4, form legend {
-    color: var(--color-text-heading);
-    margin-bottom: var(--space-xxs);
     line-height: var(--heading-line-height);
 }
 /* text size */
@@ -72,52 +63,11 @@ p {
 b, strong {
     font-weight: bold;
 }
-.text-container {
-    h2, h3, h4 {
-        margin-top: var(--space-sm);
-    }
-    
-    ul, ol, p {
-        margin-bottom: var(--space-md);
-    }
-
-    ul, ol {
-        list-style-position: outside;
-        padding-left: 24px;
-    }
-
-    ul {
-        list-style-type: disc;
-    }
-
-    ol {
-        list-style-type: decimal;
-    }
-
-    ul li, ol li {
-        line-height: var(--body-line-height);
-    }
-    
-    em {
-        font-style: italic;
-    }
-
-    u {
-        text-decoration: underline;
-    }
-}
-/* utility classes */
-.truncate {
-    // truncate text if it exceeds parent
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
 
 body {background: #1e3d3b;}
 .main {background: #1f4946 repeat url(images/background.png) center center;}
 header {
-	padding: 2em 1.5em 3em 1.5em;
+	padding: 2em 1.5em 0.5em 1.5em;
 	color: white;
 	margin: 0 auto;
 	max-width: 50em;
@@ -129,30 +79,49 @@ h1 {
 	color: #ffc7b4;
 	text-transform: uppercase;
 	text-shadow: 0px 1px 0px rgba(0,0,0,.25);
-	padding-bottom: 17em;
 }
 h1 em {
     font-family: var(--font-primary);
 	font-weight: 200;
 	font-style: normal;
 	color: #1d1d1d;
+	text-shadow: 0px 1px 1px rgba(255,255,255,.35);
 }
+
+/* hero slideshow: stacked images that crossfade */
 .slideshow {
-	animation-name: slideshow;
-	animation-direction: normal;
-	animation-play-state: running;
-	animation-timing-function: ease-in-out;
-	animation-duration: 25s;
-	animation-fill-mode: forwards;
-	animation-iteration-count: infinite;
-	background: url(images/hero_1.png);
+	position: relative;
+	width: min(85%, 642px);
+	margin: 0 auto;
+	padding-bottom: 1.5em;
+	aspect-ratio: 1 / 1;
 }
-@keyframes slideshow {
-	0% {background: url(images/hero_1.png);background-repeat: no-repeat;background-position: center 70%;}
-	25% {background: url(images/hero_2.png);background-repeat: no-repeat;background-position: center 70%;}
-	50% {background: url(images/hero_3.png);background-repeat: no-repeat;background-position: center 70%;}
-	75% {background: url(images/hero_4.png);background-repeat: no-repeat;background-position: center 70%;}
-	100% {background: url(images/hero_5.png);background-repeat: no-repeat;background-position: center 70%;}
+.slideshow picture {
+	position: absolute;
+	inset: 0 0 1.5em 0;
+	opacity: 0;
+	animation: fade 25s infinite;
+}
+.slideshow picture:nth-of-type(1) {animation-delay: 0s;}
+.slideshow picture:nth-of-type(2) {animation-delay: 5s;}
+.slideshow picture:nth-of-type(3) {animation-delay: 10s;}
+.slideshow picture:nth-of-type(4) {animation-delay: 15s;}
+.slideshow picture:nth-of-type(5) {animation-delay: 20s;}
+.slideshow .slide {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+@keyframes fade {
+	0%   {opacity: 0;}
+	5%   {opacity: 1;}
+	20%  {opacity: 1;}
+	25%  {opacity: 0;}
+	100% {opacity: 0;}
+}
+@media (prefers-reduced-motion: reduce) {
+	.slideshow picture {animation: none; opacity: 0;}
+	.slideshow picture:first-of-type {opacity: 1;}
 }
 
 
@@ -275,23 +244,25 @@ h1 em {
 fieldset {
 	font-size: var(--text-md);
 	border: none;
-	max-width: 50em;
+	max-width: 24em;
 	padding: 2em 1em;
 	margin: 0 auto;
-	text-align: center;
+	text-align: left;
 }
 form {
 	text-align: left;
 }
 label {
 	color: #ffc7b4;
+	display: block;
 }
 input {
-	margin-left: 0.5em;
-	max-width: 20em;
+	display: block;
+	width: 100%;
+	margin: 0.25em 0 0 0;
 	border-radius: 0.25em;
 	border: 1px solid #1d1d1d;
-	padding: 0 0.25em;
+	padding: 0.25em;
 }
 legend {
 	padding: 1em 0 0 0;
@@ -308,12 +279,12 @@ form div {
 }
 textarea {
 	display: block;
-	margin: 0.5em auto 0 auto;
-	width: 20em;
+	width: 100%;
+	margin: 0.25em 0 0 0;
 	height: 10em;
 	border-radius: 0.25em;
 	border: 1px solid #1d1d1d;
-	padding: 2px 4px;
+	padding: 0.25em;
 }
 button {
 	background-color: #ffc7b4;
@@ -351,19 +322,6 @@ footer p {
 	.mobilespace {
 		display: block;
 		padding-top: 1em;
-	}
-	h1 {
-		padding-bottom: 11em;
-	}
-	.slideshow {
-		background-size: 50%;
-	}
-	@keyframes slideshow {
-		0% {background: url(images/hero_1.png);background-repeat: no-repeat;background-size: 85%;background-position: center 85%;}
-		25% {background: url(images/hero_2.png);background-repeat: no-repeat;background-size: 85%;background-position: center 85%;}
-		50% {background: url(images/hero_3.png);background-repeat: no-repeat;background-size: 85%;background-position: center 85%;}
-		75% {background: url(images/hero_4.png);background-repeat: no-repeat;background-size: 85%;background-position: center 85%;}
-		100% {background: url(images/hero_5.png);background-repeat: no-repeat;background-size: 85%;background-position: center 85%;}
 	}
 	.bicon {
 		grid-column-start: 1;

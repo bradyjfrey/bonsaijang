@@ -3,8 +3,13 @@
     <meta name="Description" content="Stephen Jang, Bonsai Hobbyist.">
     <meta name="Author" content="Brady J. Frey">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.bonsaijang.com/">
+    <meta property="og:title" content="Stephen Jang, Bonsai Hobbyist">
+    <meta property="og:description" content="Stephen Jang is an artist and bonsai hobbyist in San Mateo, California, working with bonsai for over 40 years.">
     <meta property="og:image" name="image" content="https://www.bonsaijang.com/images/ogimage.jpg">
+    <meta name="twitter:card" content="summary_large_image">
 <title>Stephen Jang, Bonsai Hobbyist.</title>
 	<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.png">
@@ -19,9 +24,16 @@
 </head>
 <body>
 	<div class="main">
-		<header class="slideshow">
+		<header>
 			<h1>Stephen Jang <em class="mobilebreak">Bonsai Hobbyist</em></h1>
 		</header>
+		<div class="slideshow" role="img" aria-label="Stephen Jang in his bonsai garden">
+			<picture><source srcset="images/hero_1.webp" type="image/webp"><img class="slide" src="images/hero_1.png" alt="" width="642" height="642" decoding="async"></picture>
+			<picture><source srcset="images/hero_2.webp" type="image/webp"><img class="slide" src="images/hero_2.png" alt="" width="642" height="642" decoding="async" loading="lazy"></picture>
+			<picture><source srcset="images/hero_3.webp" type="image/webp"><img class="slide" src="images/hero_3.png" alt="" width="642" height="642" decoding="async" loading="lazy"></picture>
+			<picture><source srcset="images/hero_4.webp" type="image/webp"><img class="slide" src="images/hero_4.png" alt="" width="642" height="642" decoding="async" loading="lazy"></picture>
+			<picture><source srcset="images/hero_5.webp" type="image/webp"><img class="slide" src="images/hero_5.png" alt="" width="642" height="642" decoding="async" loading="lazy"></picture>
+		</div>
     </div>
     
     <div class="bio">
@@ -324,14 +336,14 @@
     	<article>
     		<a class="iconlink" href="images/small_scottpine.jpg">
 				<div class="bonsai">
-					<img class="bicon" src="images/small_scottpine.jpg" alt="Scott Pine bonsai, 20 years old" loading="lazy">
+					<img class="bicon" src="images/small_scottpine.jpg" alt="Scots Pine bonsai, 20 years old" loading="lazy">
 					<div class="binfo">
-						<h4>Scott Pine <em>20 years old</em></h4>
+						<h4>Scots Pine <em>20 years old</em></h4>
 						<p>Hardy pine with twisted needles, orange-brown bark, and an upright, irregular growth habit.</p>
 					</div>
 					<ul>
 						<li>歐洲赤松</li>
-						<li>Scott Pine (Pinus sylvestris)</li>
+						<li>Scots Pine (Pinus sylvestris)</li>
 						<li><strong>In training since 2024.</strong></li>
 					</ul>
 				</div>
@@ -379,7 +391,7 @@
 					</div>
 					<ul>
 						<li>映山红</li>
-						<li>Azalea (Rhododendron (varies)</li>
+						<li>Azalea (Rhododendron, varies)</li>
 						<li><strong>In training since 2024.</strong></li>
 					</ul>
 				</div>
@@ -404,9 +416,10 @@
 	 </div>
     
     <footer>
-		<form id="contact_form" name="contact" action="/thankyou" method="POST" data-netlify="true">
+		<form id="contact_form" name="contact" action="/thankyou" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
 			<fieldset>
 				<legend>Send A Message</legend>
+				<p hidden><label>Don't fill this out if you're human: <input name="bot-field"></label></p>
 				<div><label>Your Name: <input type="text" name="name" required></label></div>
 				<div><label>Your Email: <input type="email" name="email" required></label></div>
 				<div class="txtf"><label>Message: <textarea name="message" required></textarea></label></div>
