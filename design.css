@@ -1,0 +1,416 @@
+/* ============================================================
+   design.css — layered ON TOP of style.css (base)
+   A SYSTEM first, two rhythms second.
+   Aesthetic from "The Japanese Garden" (Phaidon): green linen field,
+   peach, gold foil. Craft from the real site: one frame grammar,
+   relational hairlines, large hit-fields, value (not slabs) as separation.
+   ============================================================ */
+
+:root {
+	/* palette — three notes + ink/white used sparingly */
+	--field:       #1f4946;   /* the one continuous green (matches .content) */
+	--green-deep:  #1e3d3b;   /* contact / footer stripe — matches your style.css footer */
+	--field-dark:  #1a3533;   /* HOVER state only — matches your .iconlink:hover */
+	--peach:       #ffc7b4;
+	--peach-circle:#f3b79d;
+	--gold:        #c2974f;
+	--ink:         #14302e;
+
+	/* type — real Artifex Hand CF (serif) with a SERIF fallback (was sans) */
+	--font: "artifex-hand-cf", Georgia, "Times New Roman", serif;
+	/* available weights are ONLY 200 / 500 / 800 (+ italics) */
+
+	/* a real display jump — body stays calm, display gets dramatic */
+	--step-name: clamp(2.6rem, 7vw, 5.25rem);
+	--step-h2:   clamp(1.5rem, 3vw, 2.1rem);
+	--step-lede: clamp(1.1rem, 1.6vw, 1.3rem);
+	--step-body: 1rem;
+	--step-kick: 0.74rem;
+
+	/* one spacing module */
+	--gap: 1.5rem;
+	--section: clamp(3.5rem, 7vw, 6rem);
+	--measure: 32em;
+
+	/* shared primitives */
+	--hair: 1px solid rgba(255,199,180,.16);
+	--hair-gold: 1px solid rgba(194,151,79,.45);
+}
+
+body {
+	font-family: var(--font);
+	font-weight: 500;                 /* nearest real weight to "regular" */
+	text-align: left;
+	color: var(--peach);
+	/* the ONE continuous textured field, edge to edge */
+	background: var(--field) repeat url(images/background.png) center top;
+}
+
+/* ---------- type system: hierarchy from scale + the two real voices ---------- */
+.kicker {
+	display: block;
+	font-size: var(--step-kick);
+	font-weight: 500;
+	letter-spacing: 0.26em;
+	text-transform: uppercase;
+	color: var(--gold);
+}
+.lede { font-size: var(--step-lede); font-weight: 500; line-height: 1.55; max-width: var(--measure); }
+.caps { text-transform: uppercase; }
+.lede em, .aside { font-style: italic; }      /* italic = the secondary voice (not faux weights) */
+.body { font-size: var(--step-body); line-height: 1.6; max-width: var(--measure); }
+.aside { color: var(--gold); font-size: var(--step-body); }
+
+/* spacing utilities (formerly inline styles) */
+.kicker + .montage { margin-top: 1.4em; }
+.bio-band .kicker + .lede { margin-top: 0.6em; }
+.see-more { margin-top: 2.5em; }
+
+/* screen-reader-only (gives each page a programmatic <h1> without altering the visual design) */
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* stacked name lockup — fixes the one-long-line header weakness */
+.lockup .name {
+	display: block;
+	font-size: var(--step-name);
+	line-height: 0.95;
+	font-weight: 200;                 /* extralight: airy, cover-restrained */
+	letter-spacing: 0.005em;
+	color: var(--peach);
+}
+.lockup .role {
+	display: block;
+	margin-top: 0.9em;
+	font-size: var(--step-kick);
+	font-weight: 500;
+	letter-spacing: 0.32em;
+	text-transform: uppercase;
+	color: var(--gold);
+}
+
+/* ---------- frame grammar: every image wears the same frame ---------- */
+.frame {
+	border: 1px solid rgba(0,0,0,.4);
+	box-shadow: 0 6px 20px rgba(0,0,0,.3);
+	background: var(--ink);
+}
+/* the circle is just a round member of the same family — with a tonal ring */
+.circle {
+	display: block;
+	position: relative;
+	aspect-ratio: 1 / 1;
+	border-radius: 50%;
+	overflow: hidden;
+	background: var(--field-dark);   /* recessed well; NO peach rim/line on the circle */
+}
+/* small animated circles: in the navbar and beside the bio */
+.circle--nav { width: 2.6rem; flex: none; }
+.circle--nav::after { box-shadow: inset 0 1px 5px 1px rgba(0,0,0,.5); }
+.circle .slideshow { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; padding: 0; aspect-ratio: auto; }
+.circle .slideshow picture { inset: 0; }
+.circle .slideshow .slide { width: 100%; height: 100%; object-fit: cover; }
+/* depth = INTERIOR shadow (photo recessed into the field), not a drop shadow */
+.circle::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: 50%;
+	box-shadow: inset 0 3px 26px 6px rgba(0,0,0,.55);
+	pointer-events: none;
+}
+
+/* ---------- large clickable fields with a hover value-shift ---------- */
+.field {
+	display: block;
+	text-decoration: none;
+	color: var(--peach);
+}
+.field:hover { background: var(--field-dark); color: #fff; }
+.field:hover .frame { border-color: var(--gold); }
+
+/* ---------- value (not slabs) as separation: subtle darkening, texture kept ---------- */
+.band { background: rgba(0,0,0,.16); }
+
+/* ---------- icons (Phosphor thin, inlined; stroke = currentColor) ---------- */
+.icon { display: inline-block; width: 1em; height: 1em; vertical-align: -0.125em; flex: none; }
+.btn .icon { width: 1.35em; height: 1.35em; }
+
+/* ---------- buttons ---------- */
+.btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.6em;
+	font-size: var(--step-kick);
+	font-weight: 500;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	text-decoration: none;
+	color: var(--ink);
+	background: var(--peach);
+	padding: 0.85em 1.8em;
+}
+.btn:hover { background: #1d1d1d; color: var(--peach); }
+.btn--ghost { background: transparent; color: var(--peach); border: var(--hair-gold); }
+.btn--ghost:hover { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+/* inverted: dark static, light on hover */
+.btn--invert { background: #1d1d1d; color: var(--peach); }
+.btn--invert:hover { background: var(--peach); color: var(--ink); }
+
+/* ---------- scaffolding ---------- */
+.wrap { max-width: 78em; margin: 0 auto; padding: 0 clamp(1.5em, 4vw, 3.5em); }
+.wrap--narrow { max-width: 52em; }
+/* vertical only — must not override the side padding from .wrap */
+.section { padding-top: var(--section); padding-bottom: var(--section); }
+.section--half { padding-top: calc(var(--section) / 2); padding-bottom: calc(var(--section) / 2); }
+
+/* Section divisions are FULL-BLEED color stripes, edge to edge.
+   RULE: never put a background on a .wrap — the stripe is full width,
+   only the inner .wrap constrains the content. */
+.stripe { width: 100%; }
+.stripe--dark { background: rgba(0,0,0,.18); }   /* darker value; texture still reads through */
+.stripe--deep { background: var(--green-deep); }            /* footer: #1e3d3b */
+.stripe--field { background: var(--field); }                /* flat #1f4946 */
+.stripe--content { background: #1f4946 repeat url(images/background.png) center center; }   /* textured portfolio ground */
+
+/* bio stripe — centered text */
+.bio-band { text-align: center; }
+.bio-band .lede { margin: 0 auto; color: var(--peach); }
+
+/* ---------- shared nav ---------- */
+.site-nav { background: var(--green-deep); border-bottom: 1px solid #1e3d3b; }   /* full-bleed bar, #1e3d3b */
+.nav-inner {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem 2rem;
+	max-width: 78em;
+	margin: 0 auto;
+	padding: 1.6em clamp(1.5em, 4vw, 3.5em);
+}
+.site-nav .brand { display: flex; align-items: center; gap: 0.7em; text-decoration: none; line-height: 1; }
+.site-nav .brand-text { display: block; }
+.site-nav .brand .name { display: block; font-size: 1.15rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: var(--peach); }
+.site-nav .brand .role { display: block; font-size: 0.62rem; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-top: 0.7em; }
+.site-nav ul { display: flex; flex-wrap: wrap; gap: 1.6em; list-style: none; margin: 0; padding: 0; }
+.site-nav a:not(.brand) {
+	color: var(--peach); text-decoration: none; font-size: var(--step-kick);
+	letter-spacing: 0.16em; text-transform: uppercase;
+	padding-bottom: 3px; border-bottom: 1px dotted transparent;   /* space reserved so hover doesn't jump */
+}
+/* hover (non-active only): gold + dotted underline, same weight, no reflow */
+.site-nav a:not(.brand):not([aria-current="page"]):hover { color: var(--gold); border-bottom-color: var(--gold); }
+.site-nav a[aria-current="page"] { color: #fff; font-weight: 800; }
+
+/* ---------- footer ---------- */
+.site-footer { background: var(--field); color: var(--green-deep); font-weight: 500; font-size: var(--step-body); text-align: center; }
+.site-footer .wrap { padding-top: 2.5em; padding-bottom: 2.5em; }
+.site-footer a { color: var(--gold); text-decoration: none; }
+
+/* ============================================================
+   Home — solid extrabold masthead, rhythm = the grid
+   ============================================================ */
+.concept-c .masthead { text-align: center; padding: clamp(3rem, 7vw, 5.5rem) 0 clamp(2rem, 4vw, 3rem); }
+.concept-c .masthead .lockup { display: inline-block; }
+.concept-c .masthead .lockup .name { font-size: 4rem; font-weight: 800; letter-spacing: 0.02em; }
+.concept-c .masthead .lockup .role { font-size: 1rem; }
+/* single clean gap: space above the circle == space below "Bonsai Hobbyist" */
+.concept-c .masthead .circle { width: 21rem; margin: 2.5rem auto 0; }
+
+.concept-c .montage { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.6rem; }
+/* normal: solid #1f4946 block + 10px #1f4946 frame on the textured ground; hover fills darker */
+.concept-c .tile { border: 10px solid var(--field); background: var(--field); min-width: 0; }
+.concept-c .tile:hover { background: var(--field-dark); border-color: var(--field-dark); color: #fff; }
+.concept-c .tile:hover .frame { border-color: #fff; }   /* image border white on hover */
+.concept-c .tile:hover .cap h3 { color: #fff; }          /* title white on hover */
+.concept-c .tile .shot { aspect-ratio: 1 / 1; overflow: hidden; }
+.concept-c .tile .shot img { width: 100%; height: 100%; object-fit: cover; }
+.concept-c .tile .cap { padding: 0.8em 0.2em; margin-top: 0.7em; }
+.concept-c .tile .cap h3 { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0.6em; font-size: 1.05rem; font-weight: 500; color: inherit; }
+.concept-c .tile .cap h3 .cn { font-size: 0.85em; font-weight: 400; color: var(--peach); opacity: 0.4; flex: 0 1 auto; min-width: 0; text-align: right; word-break: keep-all; line-height: 1.3; }   /* subtle peach, right edge; wraps to two words only when cramped */
+.concept-c .tile .cap span { display: block; font-size: var(--step-kick); letter-spacing: 0.06em; color: var(--gold); }
+.concept-c .tile .cap .train { color: var(--peach); opacity: 0.5; letter-spacing: 0.02em; margin-top: 0.4em; }   /* training marker, subtle */
+/* the show is the focal member of the grid — given real weight */
+.concept-c .tile--feature {
+	grid-column: span 2; grid-row: span 2;
+	position: relative;
+	display: flex; flex-direction: column; justify-content: flex-end; padding: 1.8em;
+	border: 10px solid var(--field);         /* match the thumbnails' frame */
+	background-color: var(--field);
+	background-image: url(images/show_seiboku2026.webp);
+	background-size: cover;
+	background-position: 50% 20%;
+	background-repeat: no-repeat;
+	background-clip: padding-box;             /* keep the photo inside the border, field shows through */
+	text-shadow: 0 1px 8px rgba(0,0,0,.45);
+}
+/* gradient: black .8 at the lower end (protects the type), fading up so the photo reads */
+/* drop shadow originates from the photo edge (inside the invisible border), like the thumbnails */
+.concept-c .tile--feature::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,.4) 50%, rgba(0,0,0,.08) 100%); box-shadow: inset 0 0 0 1px rgba(0,0,0,.5), 0 6px 20px rgba(0,0,0,.3); }
+/* hover: same as the thumbnails — photo border goes white, 10px border fills dark green */
+.concept-c .tile--feature:hover { border-color: var(--field-dark); }
+.concept-c .tile--feature:hover::before { box-shadow: inset 0 0 0 1px #fff, 0 6px 20px rgba(0,0,0,.3); }
+.concept-c .tile--feature > * { position: relative; }
+.concept-c .tile--feature .meta { color: var(--gold); font-size: var(--step-kick); letter-spacing: 0.14em; text-transform: uppercase; }
+.concept-c .tile--feature h2 { font-size: var(--step-h2); font-weight: 500; color: #fff; margin: 0.3em 0 0.5em; line-height: 1.1; }
+.concept-c .tile--feature p { font-size: var(--step-body); max-width: 22em; }
+.concept-c .tile--feature .ring { width: 3rem; height: 3rem; border-radius: 50%; background: var(--peach-circle); box-shadow: 0 0 0 5px var(--field-dark); margin-bottom: 1.1em; }
+
+/* ============================================================
+   Portfolio page — the rhythm of rows (image | info | metadata)
+   ============================================================ */
+.plist { border-bottom: var(--hair); }
+.prow {
+	display: grid;
+	grid-template-columns: 200px 1fr 250px;
+	gap: clamp(1.5em, 3vw, 2.6em);
+	align-items: start;
+	padding: 1.6em 1em;
+	border-top: var(--hair);
+	color: var(--peach);
+	text-decoration: none;
+}
+.prow:hover { background: var(--field-dark); color: #fff; }
+.prow:hover .frame { border-color: #fff; }
+.prow-img { aspect-ratio: 1 / 1; overflow: hidden; }
+.prow-img img { width: 100%; height: 100%; object-fit: cover; }
+.prow-info h3 { font-size: var(--text-lg); font-weight: 500; color: inherit; line-height: 1.2; }
+.prow-info h3 em { display: block; font-style: normal; font-weight: 500; font-size: 0.62em; letter-spacing: 0.04em; color: var(--gold); margin-top: 0.35em; }
+.prow-info p { font-size: var(--step-body); line-height: 1.55; margin-top: 0.9em; max-width: 40em; opacity: 0.85; }
+.prow-meta { border-left: var(--hair); padding-left: clamp(1.5em, 3vw, 2.6em); display: flex; flex-direction: column; gap: 0.7em; font-size: var(--step-body); }
+.prow-meta .cn { font-size: 1.1em; }
+.prow-meta .sp { opacity: 0.8; }
+.prow-meta .train { color: var(--gold); }
+
+/* ============================================================
+   Shows page — event header, info brick + photo montage
+   ============================================================ */
+.show-title { font-size: var(--step-h2); font-weight: 500; color: #fff; margin: 0.3em 0 0.55em; line-height: 1.1; }
+.show-lede { margin-bottom: 1.4em; }
+
+/* photo tiles keep their square; never stretch to a tall row (which leaves a "chin") */
+.concept-c .shows-montage { align-items: start; }
+
+/* the solid info brick that anchors the grid (replaces the home page's photo feature) */
+.concept-c .tile--info {
+	grid-column: span 2; grid-row: span 2;
+	align-self: stretch;                 /* fill its 2x2 span as a solid panel */
+	display: flex; flex-direction: column;
+	border: 10px solid var(--field);
+	background: #faf8f3;                  /* warm white card, like the printed flyer */
+	color: var(--ink);
+	padding: clamp(1.4em, 2.3vw, 2em);
+}
+/* lead block — the essentials read first */
+.concept-c .tile--info .event-lead .venue { color: var(--ink); font-size: var(--step-lede); font-weight: 800; line-height: 1.2; margin: 0; }
+.concept-c .tile--info .event-lead .addr,
+.concept-c .tile--info .event-lead .when { color: #46645f; font-size: var(--step-body); line-height: 1.45; margin: 0.25em 0 0; }
+.concept-c .tile--info .event-admit { margin: 1em 0 0; color: #46645f; font-size: var(--step-body); }
+.concept-c .tile--info .event-admit .free { color: #a87420; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 800; }
+.concept-c .tile--info .event-facts { margin: 1.1em 0 1.3em; display: grid; grid-template-columns: max-content 1fr; }
+.concept-c .tile--info .event-facts > div { display: grid; grid-template-columns: subgrid; grid-column: 1 / -1; column-gap: 1.4em; align-items: baseline; padding: 0.85em 0; border-top: 1px solid rgba(20,48,46,.14); }
+.concept-c .tile--info dt { color: #a87420; font-size: var(--step-kick); letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.5; white-space: nowrap; }
+.concept-c .tile--info dd { margin: 0; color: #46645f; font-size: var(--step-body); line-height: 1.4; }
+.concept-c .tile--info dd .name { display: block; color: var(--ink); font-weight: 800; }
+.concept-c .tile--info dd .sub { display: block; margin-top: 0.1em; }
+.concept-c .tile--info .btn { margin-top: auto; align-self: flex-start; }
+.concept-c .tile--info .btn--ghost { color: var(--ink); border-color: rgba(20,48,46,.3); }
+.concept-c .tile--info .btn--ghost:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+/* past shows — large feature blocks like the home page (photos to come) */
+.past-kicker { display: block; text-align: center; margin-bottom: 1.6em; }
+.past-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
+.show-feature {
+	position: relative; display: flex; flex-direction: column; justify-content: flex-end;
+	aspect-ratio: 3 / 4; padding: 1.7em;
+	border: 10px solid var(--field);
+	background: var(--field-dark) center/cover no-repeat;   /* drop a background-image in when photos arrive */
+	text-shadow: 0 1px 8px rgba(0,0,0,.45); text-decoration: none; overflow: hidden;
+}
+.show-feature::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.85) 0%, rgba(0,0,0,.35) 45%, rgba(0,0,0,.05) 100%); }
+.show-feature > * { position: relative; }
+.show-feature:hover { border-color: var(--field-dark); }
+.show-feature:hover::before { box-shadow: inset 0 0 0 1px #fff; }
+.show-feature .meta { color: var(--gold); font-size: var(--step-kick); letter-spacing: 0.14em; text-transform: uppercase; }
+.show-feature h2 { font-size: var(--step-h2); font-weight: 500; color: #fff; margin: 0.25em 0 0; line-height: 1.1; }
+.gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem; margin-top: 2.5em; }
+.gtile { border: 10px solid var(--field); background: var(--field); }
+.gtile:hover { border-color: var(--field-dark); background: var(--field-dark); }
+.gtile:hover .frame { border-color: #fff; }
+.gtile .shot { aspect-ratio: 1 / 1; overflow: hidden; }
+.gtile .shot img { width: 100%; height: 100%; object-fit: cover; }
+
+.show-video { margin-top: 2.5em; }
+.video-poster { display: block; position: relative; aspect-ratio: 16 / 9; max-width: 44em; background-size: cover; background-position: center 30%; border: 10px solid var(--field); }
+.video-poster::after { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,.4); }
+.video-poster .play { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); z-index: 1; width: 4.5rem; height: 4.5rem; border-radius: 50%; background: rgba(255,199,180,.92); display: grid; place-items: center; }
+.video-poster .play::before { content: ""; width: 0; height: 0; border-style: solid; border-width: 0.8rem 0 0.8rem 1.35rem; border-color: transparent transparent transparent #14302e; margin-left: 0.35rem; }
+.video-poster:hover .play { background: #fff; }
+.show--past .show-title { color: var(--peach); }
+
+/* ============================================================
+   Contact page — form
+   ============================================================ */
+.contact-form { max-width: 38em; }
+.contact-form .field-row { margin-bottom: 1.5em; }
+.contact-form label { display: block; color: var(--gold); text-transform: uppercase; letter-spacing: 0.14em; font-size: var(--step-kick); font-weight: 500; margin-bottom: 0.55em; }
+.contact-form input, .contact-form textarea {
+	width: 100%; box-sizing: border-box; font-family: inherit; font-size: 1rem;
+	color: var(--peach); background: var(--ink);
+	border: 1px solid rgba(255,199,180,.25); border-radius: 0; padding: 0.7em 0.85em; margin: 0;
+}
+.contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--gold); background: #0f2624; }
+.contact-form textarea { resize: vertical; }
+.contact-form button { margin-top: 0.5em; border: none; cursor: pointer; }
+
+/* ============================================================
+   Lightbox — native <dialog>, palette-matched, gentle fade
+   ============================================================ */
+.lightbox { border: none; padding: 0; margin: 0; width: 100%; height: 100%; max-width: 100%; max-height: 100%; background: transparent; overflow: hidden; place-items: center; }
+.lightbox[open] { display: grid; animation: lb-fade 0.22s ease; }
+.lightbox[open]::backdrop { background: rgba(10, 22, 21, 0.9); animation: lb-fade 0.22s ease; }
+.lightbox figure { position: relative; margin: 0; display: flex; flex-direction: column; align-items: center; gap: 0.9em; }
+.lightbox-img { display: block; max-width: 90vw; max-height: 78vh; width: auto; height: auto; border: 10px solid var(--field); background: var(--field); box-shadow: 0 12px 44px rgba(0,0,0,.5); }
+.lightbox-cap { color: var(--peach); font-size: var(--step-body); letter-spacing: 0.02em; text-align: center; }
+.lightbox-close { position: absolute; bottom: 100%; right: -2.5rem; margin-bottom: 0.4rem; z-index: 1; background: none; border: none; box-shadow: none; color: var(--peach); line-height: 0; padding: 0.2em; cursor: pointer; }
+.lightbox-close .icon { width: 2rem; height: 2rem; }
+.lightbox-close:hover { color: #fff; }
+.lightbox-close:focus, .lightbox-close:focus-visible { outline: none; }
+@keyframes lb-fade { from { opacity: 0; } to { opacity: 1; } }
+
+/* Contact modal — centered panel in the palette, same <dialog> machinery */
+.contact-modal { border: none; padding: 0; margin: 0; width: 100%; height: 100%; max-width: 100%; max-height: 100%; background: transparent; place-items: center; }
+.contact-modal[open] { display: grid; animation: lb-fade 0.22s ease; }
+.contact-modal::backdrop { background: rgba(10, 22, 21, 0.9); animation: lb-fade 0.22s ease; }
+.contact-modal-inner { position: relative; width: min(92vw, 34em); max-height: 92vh; overflow-y: auto; background: var(--field-dark); border: 1px solid rgba(255,199,180,.18); box-shadow: 0 18px 60px rgba(0,0,0,.55); padding: clamp(1.8em, 4vw, 3em); }
+.contact-modal .cm-title { font-size: var(--step-h2); font-weight: 500; color: #fff; margin: 0.3em 0 0.4em; line-height: 1.1; }
+.contact-modal .cm-lede { font-size: var(--step-body); opacity: 0.85; margin-bottom: 1.6em; max-width: 28em; }
+.contact-modal .contact-form { max-width: none; }
+.contact-modal .cm-close { position: absolute; top: 0.5rem; right: 0.6rem; background: none; border: none; box-shadow: none; color: var(--peach); line-height: 0; padding: 0.2em; cursor: pointer; }
+.contact-modal .cm-close .icon { width: 1.8rem; height: 1.8rem; }
+.contact-modal .cm-close:hover { color: #fff; }
+.contact-modal .cm-close:focus, .contact-modal .cm-close:focus-visible { outline: none; }
+
+/* ============================================================
+   Mobile
+   ============================================================ */
+.k-br { display: none; }   /* the event-kicker break only appears on mobile */
+
+@media screen and (max-width: 760px) {
+	.k-br { display: inline; }
+	.k-sep { display: none; }
+	.concept-b .hero { grid-template-columns: 1fr; }
+	.concept-b .circle { margin: 0 auto; width: min(82%, 22rem); }
+	.feature { grid-template-columns: 1fr; }
+	.concept-c .montage { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+	.concept-c .tile--feature { grid-column: span 2; grid-row: auto; }
+	.prow { grid-template-columns: 110px 1fr; gap: 1.2em; }
+	.prow-meta { grid-column: 1 / -1; border-left: none; border-top: var(--hair); padding-left: 0; padding-top: 1em; }
+	.gallery { grid-template-columns: repeat(2, 1fr); }
+	/* stacked nav: divide the links from the logo */
+	.site-nav ul { width: 100%; border-top: 1px solid var(--field); padding-top: 1em; }
+	/* darker gradient so titles stay legible on the smaller blocks */
+	.concept-c .tile--feature::before,
+	.show-feature::before { background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,.5) 100%); }
+}
