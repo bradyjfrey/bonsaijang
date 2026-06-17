@@ -62,6 +62,7 @@ body {
 .aside { color: var(--gold); font-size: var(--step-body); }
 
 /* spacing utilities (formerly inline styles) */
+.kicker--inset { margin-left: 10px; }   /* align a section title with the tile image, not its 10px frame */
 .kicker + .montage { margin-top: 1.4em; }
 .bio-band .kicker + .lede { margin-top: 0.6em; }
 .see-more { margin-top: 2.5em; }
