@@ -411,8 +411,8 @@ body {
 	.prow { grid-template-columns: 110px 1fr; gap: 1.2em; }
 	.prow-meta { grid-column: 1 / -1; border-left: none; border-top: var(--hair); padding-left: 0; padding-top: 1em; }
 	.gallery { grid-template-columns: repeat(2, 1fr); }
-	/* stacked nav: divide the links from the logo */
-	.site-nav ul { width: 100%; border-top: 1px solid var(--field); padding-top: 1em; }
+	/* stacked nav: divide the links from the logo, spread links evenly across the width */
+	.site-nav ul { width: 100%; border-top: 1px solid var(--field); padding-top: 1em; justify-content: space-between; gap: 0.8em; flex-wrap: nowrap; }
 	/* darker gradient so titles stay legible on the smaller blocks */
 	.concept-c .tile--feature::before,
 	.show-feature::before { background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,.5) 100%); }
