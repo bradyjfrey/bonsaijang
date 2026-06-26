@@ -359,9 +359,16 @@ body {
 /* The 10px field frame lives on the wrapper so the player area stays a true 16:9
    (a border on the iframe itself would shrink the draw area under border-box and make YouTube pillarbox). */
 .show-video { margin: 0 0 2.5em; border: 10px solid var(--field); background: var(--field); line-height: 0; }
-.video-poster { display: block; position: relative; width: 100%; aspect-ratio: 16 / 9; background-size: cover; background-position: center 30%; border: 0; padding: 0; cursor: pointer; }
+/* Half-width video row — one fills the left half now, a second fills the right later. */
+.show-videos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.6rem; margin-bottom: 2.5em; }
+.show-videos .show-video { margin: 0; }
+/* Same value-shift the photo tiles use: the field frame darkens on hover (only while the poster is clickable). */
+.show-video:has(.video-poster):hover { background: var(--field-dark); border-color: var(--field-dark); }
+/* Same frame grammar as the photo tiles: 1px black border that turns white on hover. */
+.video-poster { display: block; position: relative; width: 100%; aspect-ratio: 16 / 9; background-size: cover; background-position: center 30%; border: 1px solid #000; box-shadow: 0 6px 20px rgba(0,0,0,.3); padding: 0; cursor: pointer; }
+.show-video:hover .video-poster { border-color: #fff; }
 .video-poster::after { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,.4); }
-.video-frame { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; }
+.video-frame { display: block; width: 100%; aspect-ratio: 16 / 9; border: 1px solid rgba(0,0,0,.4); box-shadow: 0 6px 20px rgba(0,0,0,.3); }
 .video-poster .play { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); z-index: 1; width: 4.5rem; height: 4.5rem; border-radius: 50%; background: rgba(255,199,180,.92); display: grid; place-items: center; }
 .video-poster .play::before { content: ""; width: 0; height: 0; border-style: solid; border-width: 0.8rem 0 0.8rem 1.35rem; border-color: transparent transparent transparent #14302e; margin-left: 0.35rem; }
 .video-poster:hover .play { background: #fff; }
@@ -422,6 +429,7 @@ body {
 	.concept-b .circle { margin: 0 auto; width: min(82%, 22rem); }
 	.feature { grid-template-columns: 1fr; }
 	.concept-c .montage { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+	.show-videos { grid-template-columns: 1fr; }
 	.concept-c .tile--feature { grid-column: span 2; grid-row: auto; }
 	.prow { grid-template-columns: 110px 1fr; gap: 1.2em; }
 	.prow-meta { grid-column: 1 / -1; border-left: none; border-top: var(--hair); padding-left: 0; padding-top: 1em; }
