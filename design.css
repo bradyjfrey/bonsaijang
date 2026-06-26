@@ -66,6 +66,7 @@ body {
 .kicker + .montage { margin-top: 1.4em; }
 .bio-band .kicker + .lede { margin-top: 0.6em; }
 .see-more { margin-top: 2.5em; }
+.show--breakout .see-more { text-align: left; }   /* match the 2026 see-more; don't inherit bio-band centering */
 
 /* screen-reader-only (gives each page a programmatic <h1> without altering the visual design) */
 .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
@@ -293,6 +294,10 @@ body {
 .show-lede { margin-bottom: 1.4em; }
 /* breakout shows put the lede and montage in one container (no stripe gap), so the lede needs its own breathing room above the grid */
 .show--breakout .show-lede { margin-bottom: 2.8em; }
+/* per-event photo credit, quiet caption hugging the lede */
+.credit { margin-top: 0.6em; text-align: center; color: var(--peach); opacity: 0.55; font-size: var(--step-kick); letter-spacing: 0.14em; text-transform: uppercase; }
+.show .show-lede:has(+ .credit) { margin-bottom: 0.6em; }   /* tighten lede so the credit sits right under it */
+.show--breakout .credit { margin-bottom: 2.8em; }           /* credit then carries the breathing room before the gallery */
 
 /* photo tiles keep their square; never stretch to a tall row (which leaves a "chin") */
 .concept-c .shows-montage { align-items: start; }
