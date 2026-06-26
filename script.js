@@ -47,6 +47,23 @@
 	dialog.addEventListener("close", function () { img.src = ""; });
 })();
 
+// Show video — a lightweight poster facade. The YouTube iframe only loads on click,
+// so the page stays fast and pulls nothing from YouTube until someone presses play.
+(function () {
+	document.addEventListener("click", function (event) {
+		var poster = event.target.closest(".video-poster[data-yt]");
+		if (!poster) return;
+		event.preventDefault();
+		var iframe = document.createElement("iframe");
+		iframe.className = "video-frame";
+		iframe.src = "https://www.youtube-nocookie.com/embed/" + poster.getAttribute("data-yt") + "?autoplay=1&rel=0";
+		iframe.title = "Live demonstration video";
+		iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share");
+		iframe.setAttribute("allowfullscreen", "");
+		poster.replaceWith(iframe);
+	});
+})();
+
 // Contact modal — same native <dialog>. The form lives in static HTML so Netlify still detects it;
 // the nav link keeps href="contact.html" as a no-JS fallback.
 (function () {
