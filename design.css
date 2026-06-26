@@ -292,7 +292,7 @@ body {
 .show-title { font-size: var(--step-h2); font-weight: 500; color: #fff; margin: 0.3em 0 0.55em; line-height: 1.1; }
 .show-lede { margin-bottom: 1.4em; }
 /* breakout shows put the lede and montage in one container (no stripe gap), so the lede needs its own breathing room above the grid */
-#filoli-2010 .show-lede { margin-bottom: 2.8em; }
+.show--breakout .show-lede { margin-bottom: 2.8em; }
 
 /* photo tiles keep their square; never stretch to a tall row (which leaves a "chin") */
 .concept-c .shows-montage { align-items: start; }
